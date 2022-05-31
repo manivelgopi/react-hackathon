@@ -1,0 +1,9 @@
+.footer{
+    font-size: 90%;
+    bottom: 0;
+    position: absolute;
+    width: 100%;
+    min-height: 40px;
+    background-color: rgba(var(--bs-light-rgb)) !important;
+    padding: 1rem;
+}
