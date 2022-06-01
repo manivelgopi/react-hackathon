@@ -1,54 +1,55 @@
-import React ,{ useState }from "react";
+import React 
+from "react";
 
 function HouseHoldContainer() {
 
-  const initialState = {
-    firstName: '',
-    lastName: '',
-    biography: '',
-    transport: '',
-    agree: false,
-    breakfast: false, 
-    lunch: false, 
-    dinner: false, 
-    sizeShirt: ''
-  }
+  // const initialState = {
+  //   firstName: '',
+  //   lastName: '',
+  //   biography: '',
+  //   transport: '',
+  //   agree: false,
+  //   breakfast: false, 
+  //   lunch: false, 
+  //   dinner: false, 
+  //   sizeShirt: ''
+  // }
 
-  const loadDataIntoForm = {
-    firstName: 'Swapnil',
-    lastName: 'Srivastava',
-    biography: 'Sometimes just working on react app',
-    transport: 'boats',
-    agree: true,
-    breakfast: true, 
-    lunch: false, 
-    dinner: true, 
-    sizeShirt: 'l'
-  }
+  // const loadDataIntoForm = {
+  //   firstName: 'Swapnil',
+  //   lastName: 'Srivastava',
+  //   biography: 'Sometimes just working on react app',
+  //   transport: 'boats',
+  //   agree: true,
+  //   breakfast: true, 
+  //   lunch: false, 
+  //   dinner: true, 
+  //   sizeShirt: 'l'
+  // }
 
-  const [formState, setFormState] = useState(initialState)
+  // const [formState, setFormState] = useState(initialState)
   
-  const onChangeHandler = e => {
-    const value = e.target.type === "checkbox" ? e.target.checked : e.target.value;
+  // const onChangeHandler = e => {
+  //   const value = e.target.type === "checkbox" ? e.target.checked : e.target.value;
 
-    setFormState({
-      ...formState, 
-      [e.target.name] : value
-    });
-  }
+  //   setFormState({
+  //     ...formState, 
+  //     [e.target.name] : value
+  //   });
+  // }
 
-  const onClickHandler = () => {
-    setFormState(initialState);
-  }
+  // const onClickHandler = () => {
+  //   setFormState(initialState);
+  // }
 
-  const onSubmitHandler = e => {
-    e.preventDefault();
-    console.log(formState)
-  }
+  // const onSubmitHandler = e => {
+  //   e.preventDefault();
+  //   console.log(formState)
+  // }
 
-  const onLoadHandler = () => {
-    setFormState(loadDataIntoForm);
-  }
+  // const onLoadHandler = () => {
+  //   setFormState(loadDataIntoForm);
+  // }
 
   return (
     // <form onSubmit={onSubmitHandler}>
@@ -170,113 +171,125 @@ function HouseHoldContainer() {
     //   <button type="button" onClick={onClickHandler}>Reset Form</button>
     //   <button type="button" onClick={onLoadHandler}>Load Data</button>
     // </form>
+    <div className="container">
+      <div className="row">
+      <div className="col-12">
+      <div className="card mt-2">
+      <div className="card-header">Household</div>
+        <div className="card-body ">
+        
+        <form className="mt-4 needs-validation " noValidate>
+        <div className="row m-2">
+          <label htmlFor="electricity" className="col-sm-2 col-form-label">Electricity</label>
+          <div className="col-sm-6 col-8">
+            <input type="text" className="form-control" id="electricity" aria-describedby="electricityHelp" />
+            <div id="electricityHelp" className="form-text">Well never share your email with anyone else.</div>
+          </div>
+          <div className="col-sm-4 col-4">
+            <small>kWh at a factor of 0.3521 kgCO2e/kWh</small>
+          </div>
+        </div>
 
-    <form className="mt-4 needs-validation" novalidate>
-      <div className="row m-2">
-        <label for="electricity" className="col-sm-2 col-form-label">Electricity</label>
-        <div className="col-sm-6 col-8">
-          <input type="text" className="form-control" id="electricity" aria-describedby="electricityHelp" />
-          <div id="electricityHelp" className="form-text">Well never share your email with anyone else.</div>
+        <div className="row m-2">
+          <label htmlFor="electricity" className="col-sm-2 col-form-label">Natural gas</label>
+          <div className="col-sm-6 col-8">
+            <input type="text" className="form-control" id="electricity" aria-describedby="electricityHelp" />
+            <div id="electricityHelp" className="form-text">Well never share your email with anyone else.</div>
+          </div>
+          <div className="col-sm-3 col-4">
+              <select id="inputState" className="form-select">
+              <option defaultValue="0.18316">kWh</option>
+              <option value="5.36789">therms</option>
+              <option value="2.9400">Euro (€)</option>
+              </select>
+          </div>
         </div>
-        <div className="col-sm-4 col-4">
-          <small>kWh at a factor of 0.3521 kgCO2e/kWh</small>
-        </div>
-      </div>
 
-      <div className="row m-2">
-        <label for="electricity" className="col-sm-2 col-form-label">Natural gas</label>
-        <div className="col-sm-6 col-8">
-          <input type="text" className="form-control" id="electricity" aria-describedby="electricityHelp" />
-          <div id="electricityHelp" className="form-text">Well never share your email with anyone else.</div>
+        <div className="row m-2">
+          <label htmlFor="electricity" className="col-sm-2 col-form-label">Heating oil</label>
+          <div className="col-sm-6 col-8">
+            <input type="text" className="form-control" id="electricity" aria-describedby="electricityHelp" />
+            <div id="electricityHelp" className="form-text">Well never share your email with anyone else.</div>
+          </div>
+          <div className="col-sm-3 col-4">
+              <select id="inputState" className="form-select">
+              <option value="0.24677">kWh</option>
+              <option defaultValue="2.54014">litres</option>
+              <option value="3165.01">metric tons</option>
+              <option value="9.61547">US gallons</option>
+              </select>
+          </div>
         </div>
-        <div className="col-sm-2 col-4">
-            <select id="inputState" className="form-select">
-            <option selected="selected" value="0.18316">kWh</option>
-            <option value="5.36789">therms</option>
-            <option value="2.9400">Euro (€)</option>
-            </select>
-        </div>
-      </div>
 
-      <div className="row m-2">
-        <label for="electricity" className="col-sm-2 col-form-label">Heating oil</label>
-        <div className="col-sm-6 col-8">
-          <input type="text" className="form-control" id="electricity" aria-describedby="electricityHelp" />
-          <div id="electricityHelp" className="form-text">Well never share your email with anyone else.</div>
+        <div className="row m-2">
+          <label htmlFor="electricity" className="col-sm-2 col-form-label">Coal</label>
+          <div className="col-sm-6 col-8">
+            <input type="text" className="form-control" id="electricity" aria-describedby="electricityHelp" />
+            <div id="electricityHelp" className="form-text">Well never share your email with anyone else.</div>
+          </div>
+          <div className="col-sm-3 col-4">
+              <select id="inputState" className="form-select">
+              <option defaultValue="2883.26">metric tons</option>
+              <option value="28.8326">x 10kg bags</option>
+              <option value="57.6652">x 20kg bags</option>
+              <option value="72.0815">x 25kg bags</option>
+              <option value="144.163">x 50kg bags</option>
+              </select>
+          </div>
         </div>
-        <div className="col-sm-2 col-4">
-            <select id="inputState" className="form-select">
-            <option value="0.24677">kWh</option>
-            <option selected="selected" value="2.54014">litres</option>
-            <option value="3165.01">metric tons</option>
-            <option value="9.61547">US gallons</option>
-            </select>
-        </div>
-      </div>
 
-      <div className="row m-2">
-        <label for="electricity" className="col-sm-2 col-form-label">Coal</label>
-        <div className="col-sm-6 col-8">
-          <input type="text" className="form-control" id="electricity" aria-describedby="electricityHelp" />
-          <div id="electricityHelp" className="form-text">Well never share your email with anyone else.</div>
+        <div className="row m-2">
+          <label htmlFor="electricity" className="col-sm-2 col-form-label">LPG</label>
+          <div className="col-sm-6 col-8">
+            <input type="text" className="form-control" id="electricity" aria-describedby="electricityHelp" />
+            <div id="electricityHelp" className="form-text">Well never share your email with anyone else.</div>
+          </div>
+          <div className="col-sm-3 col-4">
+              <select id="inputState" className="form-select">
+              <option value="0.21449">kWh</option>
+              <option defaultValue="1.55709">litres</option>
+              <option value="6.28608">therms</option>
+              <option value="5.88799">US gallons</option>
+              </select>
+          </div>
         </div>
-        <div className="col-sm-2 col-4">
-            <select id="inputState" className="form-select">
-            <option selected="selected" value="2883.26">metric tons</option>
-            <option value="28.8326">x 10kg bags</option>
-            <option value="57.6652">x 20kg bags</option>
-            <option value="72.0815">x 25kg bags</option>
-            <option value="144.163">x 50kg bags</option>
-            </select>
-        </div>
-      </div>
 
-      <div className="row m-2">
-        <label for="electricity" className="col-sm-2 col-form-label">LPG</label>
-        <div className="col-sm-6 col-8">
-          <input type="text" className="form-control" id="electricity" aria-describedby="electricityHelp" />
-          <div id="electricityHelp" className="form-text">Well never share your email with anyone else.</div>
+        <div className="row m-2">
+          <label htmlFor="electricity" className="col-sm-2 col-form-label">Propane</label>
+          <div className="col-sm-6 col-8">
+            <input type="text" className="form-control" id="electricity" aria-describedby="electricityHelp" />
+            <div id="electricityHelp" className="form-text">Well never share your email with anyone else.</div>
+          </div>
+          <div className="col-sm-3 col-4">
+              <select id="inputState" className="form-select">
+              <option defaultValue="1.54354">litres</option>
+              <option value="5.84293">US gallons</option>
+              </select>
+          </div>
         </div>
-        <div className="col-sm-2 col-4">
-            <select id="inputState" className="form-select">
-            <option value="0.21449">kWh</option>
-            <option selected="selected" value="1.55709">litres</option>
-            <option value="6.28608">therms</option>
-            <option value="5.88799">US gallons</option>
-            </select>
-        </div>
-      </div>
 
-      <div className="row m-2">
-        <label for="electricity" className="col-sm-2 col-form-label">Propane</label>
-        <div className="col-sm-6 col-8">
-          <input type="text" className="form-control" id="electricity" aria-describedby="electricityHelp" />
-          <div id="electricityHelp" className="form-text">Well never share your email with anyone else.</div>
+        <div className="row m-2">
+          <label htmlFor="electricity" className="col-sm-2 col-form-label text-right">Wooden pellets</label>
+          <div className="col-sm-6 col-8">
+            <input type="text" className="form-control" id="electricity" aria-describedby="electricityHelp" />
+            <div id="electricityHelp" className="form-text">Well never share your email with anyone else.</div>
+          </div>
+          <div className="col-sm-3 col-4">
+              <select id="inputState" className="form-select">
+                <option defaultValue="72.61754">metric tons</option>
+              </select>
+          </div>
         </div>
-        <div className="col-sm-2 col-4">
-            <select id="inputState" className="form-select">
-            <option selected="selected" value="1.54354">litres</option>
-            <option value="5.84293">US gallons</option>
-            </select>
-        </div>
-      </div>
+        
+        </form>
 
-      <div className="row m-2">
-        <label for="electricity" className="col-sm-2 col-form-label">Wooden pellets</label>
-        <div className="col-sm-6 col-8">
-          <input type="text" className="form-control" id="electricity" aria-describedby="electricityHelp" />
-          <div id="electricityHelp" className="form-text">Well never share your email with anyone else.</div>
         </div>
-        <div className="col-sm-2 col-4">
-            <select id="inputState" className="form-select">
-              <option selected="selected" value="72.61754">metric tons</option>
-            </select>
-        </div>
+        {/* card-body */}
       </div>
-      <div class="col-12">
-        <button class="btn btn-outline-secondary btn-sm float-end" type="submit">Calculate Household Footprint</button>
-      </div>
-  </form>
+      </div>{/* row */}
+      
+    </div>
+    </div>
   )
 }
 

@@ -1,4 +1,4 @@
-import 'bootstrap-icons/bootstrap-icons.svg';
+// import 'bootstrap-icons/bootstrap-icons.svg';
 import { APP_TITLE } from '../config';
 
 export default function Header() {
@@ -15,24 +15,27 @@ export default function Header() {
               <div className="collapse navbar-collapse" id="navbarNavDropdown">
                 <ul className="navbar-nav">
                   <li className="nav-item">
-                    <a className="nav-link active" aria-current="page" href="#">Home</a>
+                    <a className="nav-link active" aria-current="page" href="/">Home</a>
                   </li>
                   <li className="nav-item">
-                    <a className="nav-link" href="#">Features</a>
+                    <a className="nav-link active" aria-current="page" href="/dashboard">Dashboard</a>
+                 </li>
+                   {/* <li className="nav-item">
+                    <a className="nav-link" href="/component">Components</a>
                   </li>
                   <li className="nav-item">
-                    <a className="nav-link" href="#">Pricing</a>
+                    <a className="nav-link" href="/help">Help</a>
                   </li>
                   <li className="nav-item dropdown">
-                    <a className="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <a className="nav-link dropdown-toggle" to="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                       Dropdown link
                     </a>
                     <ul className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                      <li><a className="dropdown-item" href="#">Action</a></li>
-                      <li><a className="dropdown-item" href="#">Another action</a></li>
-                      <li><a className="dropdown-item" href="#">Something else here</a></li>
+                      <li><a className="dropdown-item" to="#">Action</a></li>
+                      <li><a className="dropdown-item" to="#">Another action</a></li>
+                      <li><a className="dropdown-item" to="#">Something else here</a></li>
                     </ul>
-                  </li>
+                  </li> */}
                 </ul>
               </div>
 

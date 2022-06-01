@@ -21,4 +21,4 @@ steps:
     app_build_command: 'npm run build'
     output_location: 'build'
     skip_api_build: true
-    azure_static_web_apps_api_token: 'e4e63578f720b6b0848ede0d5091c5ee076d215d46c7665419a94849cfa20a261-80be843f-9994-4980-85a7-8c04579a2c5d00391283'
+    azure_static_web_apps_api_token: $(TOKEN)

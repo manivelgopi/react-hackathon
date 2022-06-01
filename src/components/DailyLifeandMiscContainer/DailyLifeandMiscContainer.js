@@ -2,7 +2,9 @@ import React from 'react'
 
 function DailyLifeAndMiscContainer() {
   return (
-    <div>Hello from DailyLifeAndMiscContainer</div>
+    <div className="container">
+      Hello from DailyLifeAndMiscContainer
+    </div>
   )
 }
 

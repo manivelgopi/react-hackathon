@@ -21,7 +21,7 @@
 #####################################
 
 # base image
-FROM node:8.11.2 as builder
+FROM node:latest as builder
 
 ARG ANGULAR_VERSION=7.0.2
 
@@ -36,7 +36,7 @@ WORKDIR /app
 # install and cache app dependencies
 COPY package.json package-lock.json /app/
 
-RUN npm install -g npm@latest && npm install
+RUN npm install
 
 # RUN npm install -g @angular/cli@${ANGULAR_VERSION} --unsafe-perm
 
@@ -85,7 +85,7 @@ COPY ./httpd/000-default.conf /etc/apache2/sites-enabled/
 COPY ./httpd/.htaccess /var/www/html/
 
 # Copying dist folder from builder docker above and copy to relevant apache directory
-COPY ./build/ /var/www/html/
+COPY --from=builder /app/build/ /var/www/html/
 # COPY --from=builder /app/dist/angulardemo /var/www/html/  // not using multi stage docker
 
 EXPOSE 3000
