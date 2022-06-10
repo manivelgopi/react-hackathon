@@ -1,10 +1,8 @@
 // import 'bootstrap-icons/bootstrap-icons.svg';
 import './assets/home.css';
 
-export default function Header() {
-    return (
-        <section>
-         <main>
+export default function Home() {
+    return (<main data-testid="home_element" id="home">
 
 <div id="myCarousel" className="carousel slide" data-bs-ride="carousel">
   <div className="carousel-indicators">
@@ -127,16 +125,12 @@ export default function Header() {
 
   <hr className="featurette-divider" />
 
-
 </div>
-
-
 
 <footer className="container">
   <p className="float-end"><a href="/#">Back to top</a></p>
-  <p>©2022 CARBON CALC - MIT</p>
+  <p>©2022 CARBON CALC</p>
 </footer>
 </main>
-</section>
     );
   }

@@ -1,189 +1,178 @@
-import React 
+import React, {useState, useContext, useRef}
 from "react";
+import { CarbonContext } from "../Store/DataStore";
 
-function HouseHoldContainer() {
+const HouseHoldContainer = ({parentRef}) =>{
 
-  // const initialState = {
-  //   firstName: '',
-  //   lastName: '',
-  //   biography: '',
-  //   transport: '',
-  //   agree: false,
-  //   breakfast: false, 
-  //   lunch: false, 
-  //   dinner: false, 
-  //   sizeShirt: ''
-  // }
-
-  // const loadDataIntoForm = {
-  //   firstName: 'Swapnil',
-  //   lastName: 'Srivastava',
-  //   biography: 'Sometimes just working on react app',
-  //   transport: 'boats',
-  //   agree: true,
-  //   breakfast: true, 
-  //   lunch: false, 
-  //   dinner: true, 
-  //   sizeShirt: 'l'
-  // }
-
-  // const [formState, setFormState] = useState(initialState)
+  // form object initializing
+  const initialHouseHoldData = {
+       electricity:'',
+       naturalGas:'',
+       naturalGasUnit:"kWh",  // therms, Euro
+       heatingOil:'',
+       heatingOilUnit:"kWh", // litres, metric tons, US gallons
+       coal:'',
+       coalUnit:"metric tons", // x 10kg bags, x 20kg bags, x 25kg bags, x 50kg bags
+       lpg:'',
+       lpgUnit:"kWh", // litres, therms, US gallons
+       propane:'',
+       propaneUnit:"litres", // US gallons
+       wood:'',
+       woodUnit:"metric tons"
+  }
   
-  // const onChangeHandler = e => {
-  //   const value = e.target.type === "checkbox" ? e.target.checked : e.target.value;
 
-  //   setFormState({
-  //     ...formState, 
-  //     [e.target.name] : value
-  //   });
-  // }
+  // variable
+  const electricityRef = useRef(null);
+  const naturalGasRef = useRef(null);
+  const heatingOilRef = useRef(null);
+  const coalRef = useRef(null);
+  const lpgRef = useRef(null);
+  const propaneRef= useRef(null);
+  const woodRef = useRef(null);
 
-  // const onClickHandler = () => {
-  //   setFormState(initialState);
-  // }
+  // store: data store using react context 
+  const {state, dispatch} = useContext(CarbonContext);
 
-  // const onSubmitHandler = e => {
-  //   e.preventDefault();
-  //   console.log(formState)
-  // }
+  // local variable and its update using react useState
+  const [houseHoldstate, sethouseHoldState] = useState(initialHouseHoldData);
 
-  // const onLoadHandler = () => {
-  //   setFormState(loadDataIntoForm);
-  // }
 
+  function handleValidation(){
+   
+    let formIsValid = true;
+
+    //electricity
+    if(houseHoldstate["electricity"])
+    if(!houseHoldstate["electricity"].match(/^\d*\.?\d*$/)) {
+      formIsValid = false;
+      electricityRef.current.className="form-control is-invalid"
+      sethouseHoldState({...houseHoldstate, electricity : '' })
+    }else{
+      formIsValid = true;
+      electricityRef.current.className="form-control is-valid"
+      sethouseHoldState({ ...houseHoldstate, electricity : Number(houseHoldstate["electricity"]) })
+    }
+
+    // Natural gas
+    if(houseHoldstate["naturalGas"])
+    if(!houseHoldstate["naturalGas"].match(/^\d*\.?\d*$/)) {
+        formIsValid = false;
+        naturalGasRef.current.className="form-control is-invalid"
+        sethouseHoldState({...houseHoldstate, naturalGas : '' })
+    }else{
+        formIsValid = true;
+        naturalGasRef.current.className="form-control is-valid"
+        sethouseHoldState({...houseHoldstate, naturalGas : Number(houseHoldstate["naturalGas"]) })
+    }
+
+    // Heating Oil
+    if(houseHoldstate["heatingOil"])
+    if (!houseHoldstate["heatingOil"].match(/^\d*\.?\d*$/)) {
+        formIsValid = false;
+        heatingOilRef.current.className="form-control is-invalid"
+        sethouseHoldState({...houseHoldstate, heatingOil : '' })
+    }else{
+        formIsValid = true;
+        heatingOilRef.current.className="form-control is-valid"
+        sethouseHoldState({...houseHoldstate, heatingOil : Number(houseHoldstate["heatingOil"]) })
+    }
+
+    // coal
+    if(houseHoldstate["coal"])
+    if (!houseHoldstate["coal"].match(/^\d*\.?\d*$/)) {
+        formIsValid = false;
+        coalRef.current.className="form-control is-invalid"
+        sethouseHoldState({...houseHoldstate, coal : '' })
+    }else{
+        formIsValid = true;
+        coalRef.current.className="form-control is-valid"
+        sethouseHoldState({...houseHoldstate, coal : Number(houseHoldstate["coal"]) })
+    }
+
+    // Lpg
+    if(houseHoldstate["lpg"])
+    if (!houseHoldstate["lpg"].match(/^\d*\.?\d*$/)) {
+        formIsValid = false;
+        lpgRef.current.className="form-control is-invalid"
+        sethouseHoldState({...houseHoldstate, lpg : '' })
+    }else{
+        formIsValid = true;
+        lpgRef.current.className="form-control is-valid"
+        sethouseHoldState({...houseHoldstate, lpg : Number(houseHoldstate["lpg"]) })
+    }
+
+    // Propane
+    if(houseHoldstate["propane"])
+    if (!houseHoldstate["propane"].match(/^\d*\.?\d*$/)) {
+        formIsValid = false;
+        propaneRef.current.className="form-control is-invalid"
+        sethouseHoldState({...houseHoldstate, propane : '' })
+    }else{
+        formIsValid = true;
+        propaneRef.current.className="form-control is-valid"
+        sethouseHoldState({...houseHoldstate, propane : Number(houseHoldstate["propane"]) })
+    }
+
+    // Wood
+    if(houseHoldstate["wood"])
+    if (!houseHoldstate["wood"].match(/^\d*\.?\d*$/)) {
+        formIsValid = false;
+        woodRef.current.className="form-control is-invalid"
+        sethouseHoldState({...houseHoldstate, wood : '' })
+    }else{
+        formIsValid = true;
+        woodRef.current.className="form-control is-valid"
+        sethouseHoldState({...houseHoldstate, wood : Number(houseHoldstate["wood"]) })
+    }
+    
+    return formIsValid;
+  }
+
+  React.useEffect(() => {
+    parentRef.current = HouseDataDispatch;
+  })
+
+  const HouseDataDispatch = () =>{
+    if(handleValidation()){
+      dispatch({
+        ...state, 
+      household: houseHoldstate
+      });
+      return true;
+    }else 
+      return false;
+  }
+
+  function onChangeHandler(e){
+      sethouseHoldState({
+        ...houseHoldstate, 
+        [e.target.name] : e.target.value
+      })
+  }
+  
   return (
-    // <form onSubmit={onSubmitHandler}>
-    //   <div>Name in HouseHoldContainer</div>
-    //   <br/>
-
-    //   <span>{formState.firstName} {formState.lastName}</span> 
-    //   <br/>
-
-    //   <label htmlFor="firstName">First Name</label>
-    //   <input id="firstName" 
-    //         name="firstName"
-    //         onChange={onChangeHandler}
-    //         value={formState.firstName}
-    //   />
-    //   <br/>
-
-    //   <label htmlFor="lastName">Last Name</label>
-    //   <input id="lastName"
-    //         name="lastName" 
-    //         onChange={onChangeHandler}
-    //         value={formState.lastName}
-    //   />
-    //   <br/>
-
-    //   <label htmlFor="biography">Biography</label>
-    //   <textarea rows="5" 
-    //       id="biography" 
-    //       name="biography" 
-    //       onChange={onChangeHandler} 
-    //       value={formState.biography}/>
-    //   <br/>
-
-    //   <label htmlFor="transport">Pref. Transport</label>
-    //   <select
-    //     id="transport"
-    //     name="transport"
-    //     onChange={onChangeHandler}
-    //     value={formState.transport}>
-    //     <option>None Selected</option>
-    //     <option value="planes">Planes</option>
-    //     <option value="trains">Trains</option>
-    //     <option value="cars">Cars</option>
-    //     <option value="boats">Boats</option>
-    //   </select>
-    //   <br/>
-
-    //   <fieldset>
-    //     <legend>Select your meals</legend>
-    //     <input 
-    //       id="breakfast"
-    //       name="breakfast"
-    //       type="checkbox"
-    //       onChange={onChangeHandler}
-    //       checked={formState.breakfast}
-    //     />
-    //     <label htmlFor="breakfast">Breakfast</label>
-
-    //     <input 
-    //       id="lunch"
-    //       name="lunch"
-    //       type="checkbox"
-    //       onChange={onChangeHandler}
-    //       checked={formState.lunch}
-    //     />
-    //     <label htmlFor="lunch">Lunch</label>
-
-    //     <input 
-    //       id="dinner"
-    //       name="dinner"
-    //       type="checkbox"
-    //       onChange={onChangeHandler}
-    //       checked={formState.dinner}
-    //     />
-    //     <label htmlFor="dinner">Dinner</label>
-    //   </fieldset>
-
-    //   <fieldset>
-    //     <legend>T Shirt Sizes</legend>
-    //     <input 
-    //       id="sizeS"
-    //       name="sizeShirt"
-    //       type="radio"
-    //       onChange={onChangeHandler}
-    //       value="s"
-    //       checked={formState.sizeShirt === "s"}
-    //     />
-    //     <label htmlFor="sizeS">Small</label> 
-    //     <input 
-    //       id="sizeM"
-    //       name="sizeShirt"
-    //       type="radio"
-    //       onChange={onChangeHandler}
-    //       value="m"
-    //       checked={formState.sizeShirt === "m"}
-    //     />
-    //     <label htmlFor="sizeS">Medium</label> 
-    //     <input 
-    //       id="sizeL"
-    //       name="sizeShirt"
-    //       type="radio"
-    //       onChange={onChangeHandler}
-    //       value="l"
-    //       checked={formState.sizeShirt === "l"}
-    //     />
-    //     <label htmlFor="sizeS">Large</label> 
-    //   </fieldset>
-
-    //   <label htmlFor="agree">I Agree to the TandC</label>
-    //   <input 
-    //     id="agree"
-    //     name="agree"
-    //     type="checkbox"
-    //     onChange={onChangeHandler}
-    //     checked={formState.agree}
-    //   />
-
-    //   <button type="submit">Save</button>
-    //   <button type="button" onClick={onClickHandler}>Reset Form</button>
-    //   <button type="button" onClick={onLoadHandler}>Load Data</button>
-    // </form>
-    <div className="container">
+    <div className="container" data-testid="household-element" >
       <div className="row">
       <div className="col-12">
       <div className="card mt-2">
       <div className="card-header">Household</div>
         <div className="card-body ">
         
-        <form className="mt-4 needs-validation " noValidate>
+        <form
+        id="householdForm">
         <div className="row m-2">
           <label htmlFor="electricity" className="col-sm-2 col-form-label">Electricity</label>
           <div className="col-sm-6 col-8">
-            <input type="text" className="form-control" id="electricity" aria-describedby="electricityHelp" />
-            <div id="electricityHelp" className="form-text">Well never share your email with anyone else.</div>
+            <input
+            onChange={onChangeHandler}
+            value={houseHoldstate.electricity}
+            type="text" className="form-control" 
+            ref={electricityRef}
+            id="electricity"
+            name="electricity" 
+            aria-describedby="electricityHelp" required/>
+            <div id="electricityHelp" className="form-text">Enter your electricity meter usage in kWh</div>
           </div>
           <div className="col-sm-4 col-4">
             <small>kWh at a factor of 0.3521 kgCO2e/kWh</small>
@@ -191,95 +180,172 @@ function HouseHoldContainer() {
         </div>
 
         <div className="row m-2">
-          <label htmlFor="electricity" className="col-sm-2 col-form-label">Natural gas</label>
+          <label htmlFor="naturalGas" className="col-sm-2 col-form-label">Natural gas</label>
           <div className="col-sm-6 col-8">
-            <input type="text" className="form-control" id="electricity" aria-describedby="electricityHelp" />
-            <div id="electricityHelp" className="form-text">Well never share your email with anyone else.</div>
+            <input
+            onChange={onChangeHandler}
+            value={houseHoldstate.naturalGas}
+            type="text" className="form-control" 
+            ref={naturalGasRef}
+            name="naturalGas" 
+            id="naturalGas" 
+            aria-describedby="naturalGasHelp" />
+            <div id="naturalGasHelp" className="form-text">Enter your natural gas meter usage value</div>
           </div>
           <div className="col-sm-3 col-4">
-              <select id="inputState" className="form-select">
-              <option defaultValue="0.18316">kWh</option>
-              <option value="5.36789">therms</option>
-              <option value="2.9400">Euro (€)</option>
+              <select
+              onChange={onChangeHandler}
+              value={houseHoldstate.naturalGasUnit}
+              id="naturalGasUnit" 
+              name="naturalGasUnit" 
+              className="form-select">
+              <option defaultValue="kWh">kWh</option>
+              <option value="therms">therms</option>
+              <option value="Euro">Euro</option>
               </select>
           </div>
         </div>
 
         <div className="row m-2">
-          <label htmlFor="electricity" className="col-sm-2 col-form-label">Heating oil</label>
+          <label htmlFor="heatingOil" className="col-sm-2 col-form-label">Heating oil</label>
           <div className="col-sm-6 col-8">
-            <input type="text" className="form-control" id="electricity" aria-describedby="electricityHelp" />
-            <div id="electricityHelp" className="form-text">Well never share your email with anyone else.</div>
+            <input
+            onChange={onChangeHandler}
+            value={houseHoldstate.heatingOil}
+            type="text" className="form-control" 
+            ref={heatingOilRef}
+            name="heatingOil" 
+            id="heatingOil" 
+            aria-describedby="heatingOilHelp" />
+            <div id="heatingOilHelp" className="form-text">Enter your heating oil usage value</div>
           </div>
           <div className="col-sm-3 col-4">
-              <select id="inputState" className="form-select">
-              <option value="0.24677">kWh</option>
-              <option defaultValue="2.54014">litres</option>
-              <option value="3165.01">metric tons</option>
-              <option value="9.61547">US gallons</option>
+              <select
+              onChange={onChangeHandler}
+              value={houseHoldstate.heatingOilUnit}
+              id="heatingOilUnit" 
+              name="heatingOilUnit" 
+              className="form-select">
+              <option value="kWh">kWh</option>
+              <option defaultValue="litres">litres</option>
+              <option value="metric tons">metric tons</option>
+              <option value="US gallons">US gallons</option>
               </select>
           </div>
         </div>
 
         <div className="row m-2">
-          <label htmlFor="electricity" className="col-sm-2 col-form-label">Coal</label>
+          <label htmlFor="coal" className="col-sm-2 col-form-label">Coal</label>
           <div className="col-sm-6 col-8">
-            <input type="text" className="form-control" id="electricity" aria-describedby="electricityHelp" />
-            <div id="electricityHelp" className="form-text">Well never share your email with anyone else.</div>
+            <input
+            onChange={onChangeHandler}
+            value={houseHoldstate.coal}
+            type="text" className="form-control" 
+            ref={coalRef}
+            name="coal" 
+            id="coal" 
+            aria-describedby="coalHelp" />
+            <div id="coalHelp" className="form-text">Enter your coal usage value</div>
           </div>
           <div className="col-sm-3 col-4">
-              <select id="inputState" className="form-select">
-              <option defaultValue="2883.26">metric tons</option>
-              <option value="28.8326">x 10kg bags</option>
-              <option value="57.6652">x 20kg bags</option>
-              <option value="72.0815">x 25kg bags</option>
-              <option value="144.163">x 50kg bags</option>
+              <select
+              onChange={onChangeHandler}
+              value={houseHoldstate.coalUnit}
+              id="coalUnit"
+              name="coalUnit" 
+              className="form-select">
+              <option defaultValue="metric tons">metric tons</option>
+              <option value="x 10kg bags">x 10kg bags</option>
+              <option value="x 20kg bags">x 20kg bags</option>
+              <option value="x 25kg bags">x 25kg bags</option>
+              <option value="x 50kg bags">x 50kg bags</option>
               </select>
           </div>
         </div>
 
         <div className="row m-2">
-          <label htmlFor="electricity" className="col-sm-2 col-form-label">LPG</label>
+          <label htmlFor="lpg" className="col-sm-2 col-form-label">LPG</label>
           <div className="col-sm-6 col-8">
-            <input type="text" className="form-control" id="electricity" aria-describedby="electricityHelp" />
-            <div id="electricityHelp" className="form-text">Well never share your email with anyone else.</div>
+            <input
+            onChange={onChangeHandler}
+            value={houseHoldstate.lpg}
+            type="text" className="form-control" 
+            ref={lpgRef}
+            name="lpg" 
+            id="lpg" 
+            aria-describedby="lpgHelp" />
+            <div id="lpgHelp" className="form-text">Enter your LPG usage value</div>
           </div>
           <div className="col-sm-3 col-4">
-              <select id="inputState" className="form-select">
-              <option value="0.21449">kWh</option>
-              <option defaultValue="1.55709">litres</option>
-              <option value="6.28608">therms</option>
-              <option value="5.88799">US gallons</option>
+              <select
+              onChange={onChangeHandler}
+              value={houseHoldstate.lpgUnit}
+              id="lpgUnit" 
+              name="lpgUnit" 
+              className="form-select">
+              <option value="kWh">kWh</option>
+              <option defaultValue="litres">litres</option>
+              <option value="therms">therms</option>
+              <option value="US gallons">US gallons</option>
               </select>
           </div>
         </div>
 
         <div className="row m-2">
-          <label htmlFor="electricity" className="col-sm-2 col-form-label">Propane</label>
+          <label htmlFor="propane" className="col-sm-2 col-form-label">Propane</label>
           <div className="col-sm-6 col-8">
-            <input type="text" className="form-control" id="electricity" aria-describedby="electricityHelp" />
-            <div id="electricityHelp" className="form-text">Well never share your email with anyone else.</div>
+            <input
+            onChange={onChangeHandler}
+            value={houseHoldstate.propane}
+            type="text" className="form-control" 
+            ref={propaneRef}
+            name="propane" 
+            id="propane" 
+            aria-describedby="propaneHelp" />
+            <div id="propaneHelp" className="form-text">Enter your propane usage value</div>
           </div>
           <div className="col-sm-3 col-4">
-              <select id="inputState" className="form-select">
-              <option defaultValue="1.54354">litres</option>
-              <option value="5.84293">US gallons</option>
+              <select
+              onChange={onChangeHandler}
+              value={houseHoldstate.propaneUnit}
+              id="propaneUnit" 
+              name="propaneUnit" 
+              className="form-select">
+              <option defaultValue="litres">litres</option>
+              <option value="US gallons">US gallons</option>
               </select>
           </div>
         </div>
 
         <div className="row m-2">
-          <label htmlFor="electricity" className="col-sm-2 col-form-label text-right">Wooden pellets</label>
+          <label htmlFor="wood" className="col-sm-2 col-form-label text-right">Wooden pellets</label>
           <div className="col-sm-6 col-8">
-            <input type="text" className="form-control" id="electricity" aria-describedby="electricityHelp" />
-            <div id="electricityHelp" className="form-text">Well never share your email with anyone else.</div>
+            <input
+            onChange={onChangeHandler}
+            value={houseHoldstate.wood}
+            type="text" className="form-control" 
+            ref={woodRef}
+            name="wood" 
+            id="wood" 
+            aria-describedby="woodHelp" />
+            <div id="woodHelp" className="form-text">Enter your wooden pellets usage value</div>
           </div>
           <div className="col-sm-3 col-4">
-              <select id="inputState" className="form-select">
-                <option defaultValue="72.61754">metric tons</option>
+              <select
+              onChange={onChangeHandler}
+              value={houseHoldstate.woodUnit}
+              id="woodUnit" 
+              name="woodUnit" 
+              className="form-select">
+                <option defaultValue="metric tons">metric tons</option>
               </select>
           </div>
         </div>
+
+        <button
+        hidden={true}
+        className="hidden"
+        type='submit'>Submit</button>
         
         </form>
 
