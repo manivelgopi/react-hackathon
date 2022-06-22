@@ -2,8 +2,8 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import ResultContainer from '../ResultContainer';
 import DataStoreProvider from '../../Store/DataStore';
 import axios from 'axios'
-
 import 'jest-canvas-mock';
+
 jest.mock('axios');
 jest.mock('react-chartjs-2', () => ({
   Doughnut: () => null, // add any additional chart types here

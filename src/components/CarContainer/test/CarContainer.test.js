@@ -23,5 +23,4 @@ describe('CarContainer', () => {
         expect(screen.getByLabelText('Mileage', {selector: 'input'})).toBeInTheDocument()
   });
  
- 
  });

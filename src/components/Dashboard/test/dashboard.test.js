@@ -47,15 +47,8 @@ describe('Dashboard', () => {
         
         const submit = screen.getByRole('button', { name: 'Calculate Now' }) 
         fireEvent.click(submit)
-        // act( () => {
-          
-        //   expect(result.current()).toBeCalled()
-        // });
         
-
   });
-
-
 
 
  });

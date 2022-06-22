@@ -3,35 +3,28 @@ import { CarbonContext } from "../Store/DataStore";
 
 function BusContainer({parentRef}) {
 
-  // form object initializing
-  const initialBusData = {
-    bus: '',
-    busUnit: 'km',
-    coach: '',
-    coachUnit: 'km',
-    train: '',
-    trainUnit: 'km',
-    longDisTrain: '',
-    longDisTrainUnit: 'km',
-    tram: '',
-    tramUnit: 'km',
-    subway: '',
-    subwayUnit: 'km',
-    taxi: '',
-    taxiUnit: 'km'
-}
-
 const {state, dispatch} = useContext(CarbonContext);
-const [busState, setBusState] = useState(initialBusData);
+const {busTrain} = state;
+const [busState, setBusState] = useState(busTrain);
 
 useEffect(() => {
  parentRef.current = submitHandler;
 })
 
 const submitHandler = () =>{
+  const {bus, coach, train, longDisTrain, tram, subway, taxi} = busState;
+  
  dispatch({
    ...state, 
-   busTrain: busState
+   busTrain: {...busState,
+    bus:parseFloat(bus),
+    coach:parseFloat(coach),
+    train:parseFloat(train),
+     longDisTrain:parseFloat(longDisTrain),
+    tram:parseFloat(tram),
+    subway:parseFloat(subway),
+    taxi:parseFloat(taxi)
+  }
  });
  return true;
 }
@@ -50,6 +43,7 @@ const onChangeHandler = e => {
       <div className="card mt-2">
       <div className="card-header">Bus and Train</div>
         <div className="card-body">
+
       <div className="row m-2">
         <label htmlFor="bus" className="col-sm-4 col-form-label">Bus</label>
         <div className="col-sm-6 col-8">

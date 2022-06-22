@@ -4,24 +4,6 @@ import { CarbonContext } from "../Store/DataStore";
 
 const HouseHoldContainer = ({parentRef}) =>{
 
-  // form object initializing
-  const initialHouseHoldData = {
-       electricity:'',
-       naturalGas:'',
-       naturalGasUnit:"kWh",  // therms, Euro
-       heatingOil:'',
-       heatingOilUnit:"kWh", // litres, metric tons, US gallons
-       coal:'',
-       coalUnit:"metric tons", // x 10kg bags, x 20kg bags, x 25kg bags, x 50kg bags
-       lpg:'',
-       lpgUnit:"kWh", // litres, therms, US gallons
-       propane:'',
-       propaneUnit:"litres", // US gallons
-       wood:'',
-       woodUnit:"metric tons"
-  }
-  
-
   // variable
   const electricityRef = useRef(null);
   const naturalGasRef = useRef(null);
@@ -34,98 +16,92 @@ const HouseHoldContainer = ({parentRef}) =>{
   // store: data store using react context 
   const {state, dispatch} = useContext(CarbonContext);
 
+  const {household} = state;
   // local variable and its update using react useState
-  const [houseHoldstate, sethouseHoldState] = useState(initialHouseHoldData);
-
+  const [houseHoldstate, sethouseHoldState] = useState(household);
 
   function handleValidation(){
-   
+    
     let formIsValid = true;
 
     //electricity
+    
     if(houseHoldstate["electricity"])
-    if(!houseHoldstate["electricity"].match(/^\d*\.?\d*$/)) {
+    if(!houseHoldstate["electricity"].toString().match(/^\d*\.?\d*$/)) {
       formIsValid = false;
       electricityRef.current.className="form-control is-invalid"
       sethouseHoldState({...houseHoldstate, electricity : '' })
     }else{
       formIsValid = true;
-      electricityRef.current.className="form-control is-valid"
-      sethouseHoldState({ ...houseHoldstate, electricity : Number(houseHoldstate["electricity"]) })
+      electricityRef.current.className="form-control is-valid";
     }
 
     // Natural gas
     if(houseHoldstate["naturalGas"])
-    if(!houseHoldstate["naturalGas"].match(/^\d*\.?\d*$/)) {
+    if(!houseHoldstate["naturalGas"].toString().match(/^\d*\.?\d*$/)) {
         formIsValid = false;
         naturalGasRef.current.className="form-control is-invalid"
         sethouseHoldState({...houseHoldstate, naturalGas : '' })
     }else{
         formIsValid = true;
-        naturalGasRef.current.className="form-control is-valid"
-        sethouseHoldState({...houseHoldstate, naturalGas : Number(houseHoldstate["naturalGas"]) })
+        naturalGasRef.current.className="form-control is-valid";
     }
 
     // Heating Oil
     if(houseHoldstate["heatingOil"])
-    if (!houseHoldstate["heatingOil"].match(/^\d*\.?\d*$/)) {
+    if (!houseHoldstate["heatingOil"].toString().match(/^\d*\.?\d*$/)) {
         formIsValid = false;
         heatingOilRef.current.className="form-control is-invalid"
         sethouseHoldState({...houseHoldstate, heatingOil : '' })
     }else{
         formIsValid = true;
-        heatingOilRef.current.className="form-control is-valid"
-        sethouseHoldState({...houseHoldstate, heatingOil : Number(houseHoldstate["heatingOil"]) })
+        heatingOilRef.current.className="form-control is-valid";
     }
 
     // coal
     if(houseHoldstate["coal"])
-    if (!houseHoldstate["coal"].match(/^\d*\.?\d*$/)) {
+    if (!houseHoldstate["coal"].toString().match(/^\d*\.?\d*$/)) {
         formIsValid = false;
         coalRef.current.className="form-control is-invalid"
         sethouseHoldState({...houseHoldstate, coal : '' })
     }else{
         formIsValid = true;
-        coalRef.current.className="form-control is-valid"
-        sethouseHoldState({...houseHoldstate, coal : Number(houseHoldstate["coal"]) })
+        coalRef.current.className="form-control is-valid";
     }
 
     // Lpg
     if(houseHoldstate["lpg"])
-    if (!houseHoldstate["lpg"].match(/^\d*\.?\d*$/)) {
+    if (!houseHoldstate["lpg"].toString().match(/^\d*\.?\d*$/)) {
         formIsValid = false;
         lpgRef.current.className="form-control is-invalid"
         sethouseHoldState({...houseHoldstate, lpg : '' })
     }else{
         formIsValid = true;
-        lpgRef.current.className="form-control is-valid"
-        sethouseHoldState({...houseHoldstate, lpg : Number(houseHoldstate["lpg"]) })
+        lpgRef.current.className="form-control is-valid";
     }
 
     // Propane
     if(houseHoldstate["propane"])
-    if (!houseHoldstate["propane"].match(/^\d*\.?\d*$/)) {
+    if (!houseHoldstate["propane"].toString().match(/^\d*\.?\d*$/)) {
         formIsValid = false;
         propaneRef.current.className="form-control is-invalid"
         sethouseHoldState({...houseHoldstate, propane : '' })
     }else{
         formIsValid = true;
-        propaneRef.current.className="form-control is-valid"
-        sethouseHoldState({...houseHoldstate, propane : Number(houseHoldstate["propane"]) })
+        propaneRef.current.className="form-control is-valid";
     }
 
     // Wood
     if(houseHoldstate["wood"])
-    if (!houseHoldstate["wood"].match(/^\d*\.?\d*$/)) {
+    if (!houseHoldstate["wood"].toString().match(/^\d*\.?\d*$/)) {
         formIsValid = false;
         woodRef.current.className="form-control is-invalid"
         sethouseHoldState({...houseHoldstate, wood : '' })
     }else{
         formIsValid = true;
-        woodRef.current.className="form-control is-valid"
-        sethouseHoldState({...houseHoldstate, wood : Number(houseHoldstate["wood"]) })
+        woodRef.current.className="form-control is-valid";
     }
-    
+
     return formIsValid;
   }
 
@@ -133,23 +109,39 @@ const HouseHoldContainer = ({parentRef}) =>{
     parentRef.current = HouseDataDispatch;
   })
 
+  // function converttoFloat(){
+  //   setLocaldata({...})
+  // }
+
   const HouseDataDispatch = () =>{
+    const {electricity, naturalGas, heatingOil, coal, lpg, propane,wood } = houseHoldstate;
+    
     if(handleValidation()){
       dispatch({
         ...state, 
-      household: houseHoldstate
+      household:{ ...houseHoldstate, 
+        electricity : parseFloat(electricity),
+        naturalGas: parseFloat(naturalGas), 
+        heatingOil: parseFloat(heatingOil),
+        coal: parseFloat(coal),
+        lpg: parseFloat(lpg),
+        propane: parseFloat(propane),
+        wood: parseFloat(wood)
+      } 
+      
       });
       return true;
     }else 
       return false;
   }
-
+  
   function onChangeHandler(e){
-      sethouseHoldState({
-        ...houseHoldstate, 
-        [e.target.name] : e.target.value
-      })
+        sethouseHoldState({
+          ...houseHoldstate, 
+          [e.target.name] : e.target.value 
+        })
   }
+
   
   return (
     <div className="container" data-testid="household-element" >
@@ -170,7 +162,7 @@ const HouseHoldContainer = ({parentRef}) =>{
             type="text" className="form-control" 
             ref={electricityRef}
             id="electricity"
-            name="electricity" 
+            name="electricity"
             aria-describedby="electricityHelp" required/>
             <div id="electricityHelp" className="form-text">Enter your electricity meter usage in kWh</div>
           </div>

@@ -79,7 +79,6 @@ describe('FlightContainer', () => {
     expect(trips.value).toBe("bad");
     expect(trips.value).not.toMatch(/^\d*\.?\d*$/)
     expect(result.current()).toBeFalsy()
-
   })
  
  });

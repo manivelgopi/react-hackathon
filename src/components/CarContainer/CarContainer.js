@@ -2,31 +2,22 @@ import React, {useContext, useState, useEffect} from 'react'
 import { CarbonContext } from "../Store/DataStore";
 
 function CarContainer({parentRef}){
-  // form object initializing
-  const initialCarData = {
-       mileage:'',
-       mileageUnit:'km',   
-       vehicleType:'',
-       manufacturingYear:'',
-       carType:'',
-       carModel:'',
-       derivative:'',
-       efficiency:'',
-       efficiencyUnit:'mpg-uk', 
-	     efficiencyType:'petrol'
-}
 
-const {state, dispatch} = useContext(CarbonContext);
-  const [carState, setCarState] = useState(initialCarData);
+  const {state, dispatch} = useContext(CarbonContext);
+  const {car} = state;
+  const [carState, setCarState] = useState(car);
 
   useEffect(() => {
     parentRef.current = submitHandler;
   })
 
   const submitHandler = () =>{
+    const {mileage} = carState;
     dispatch({
       ...state, 
-      car: carState
+      car: {...carState,
+        mileage: parseFloat(mileage)
+      }
     });
     return true;
   }

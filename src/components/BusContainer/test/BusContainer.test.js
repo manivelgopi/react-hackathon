@@ -13,7 +13,7 @@ describe('BusContainer', () => {
         ,)
         expect(screen.getByText(/Bus and Train/i)).toBeInTheDocument()
   });
-
+  
   test('BusContainer component', () => {
     render(
         <DataStoreProvider>

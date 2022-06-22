@@ -6,5 +6,4 @@ describe('APP', () => {
     render(<Footer />);
     expect(screen.getByText(/© 2022 - Carbon Calc. All rights reserved/i)).toBeInTheDocument();
   });
- 
  });

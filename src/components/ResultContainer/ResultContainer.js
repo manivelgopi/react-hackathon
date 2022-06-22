@@ -51,19 +51,17 @@ function ResultContainer({parentRef}) {
 
   // Submit button handler 
   const onSubmitHandler =()=>{
-    
-     axios.post('https://herhackathon-app.azurewebsites.net/herHackathon/CarbonFootprint/calculate', state)
-     .then(function (response) {
-        console.log(response.data);
-        setFootprint(response.data.carbonFootPrint.toFixed(2))
-        setIsloading(false);
-     })
-     .catch(function (error) {
-       console.log("Submit Error",error);
+    axios.post('https://herhackathon-app.azurewebsites.net/herHackathon/CarbonFootprint/calculate', state)
+    .then(function (response) {
+       console.log(response.data);
+       setFootprint(response.data.carbonFootPrint.toFixed(2))
        setIsloading(false);
-     });
- 
-   }
+    })
+    .catch(function (error) {
+      console.log("Submit Error",error);
+      setIsloading(false);
+    });
+  }
 
    useEffect(() => {
     parentRef.current = onSubmitHandler;

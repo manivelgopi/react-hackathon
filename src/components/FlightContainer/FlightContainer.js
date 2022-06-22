@@ -1,20 +1,14 @@
-import React from 'react'
+import React, {useContext, useState, useEffect} from 'react'
 import { CarbonContext } from "../Store/DataStore";
 
 function FlightContainer({parentRef}) {
 
   // form object initializing
-  const initialFlightData = {
-    flightType: "",
-    fromCity: "",
-    toCity: "",
-    viaCity: "",
-    classType: "",
-    trips: ""
-  };
+  const {state, dispatch} = useContext(CarbonContext);
 
-  const {state, dispatch} = React.useContext(CarbonContext);
-  const [flightstate, setFlightstate] = React.useState(initialFlightData);
+  const {flight} = state;
+
+  const [flightstate, setFlightstate] = useState(flight);
 
   function handleValidation(){
    
@@ -55,8 +49,7 @@ function FlightContainer({parentRef}) {
       }
       else{
         tripsValid = true;
-        document.getElementById('trips').className="form-control is-valid"
-        // setFlightstate({...flightstate, trips : Number(flightstate["trips"]) })
+        document.getElementById('trips').className="form-control is-valid";
       }
 
     }else return true
@@ -65,15 +58,17 @@ function FlightContainer({parentRef}) {
   }
 
 
-  React.useEffect(() => {
+  useEffect(() => {
     parentRef.current = submitHandler;
   })
 
   const submitHandler = () =>{
+    const {trips} = flightstate;
+
     if(handleValidation()){
       dispatch({
         ...state, 
-        flight: flightstate
+        flight:{...flightstate,  trips: Number(trips) }
       });
       return true;
     }else 
@@ -81,11 +76,10 @@ function FlightContainer({parentRef}) {
   }
 
   const onChangeHandler = e => {
-    setFlightstate({
+      setFlightstate({
       ...flightstate, 
-      [e.target.name] : e.target.value
-    });
-
+      [e.target.name] : e.target.value 
+      })
   }
   
   return (
@@ -95,6 +89,7 @@ function FlightContainer({parentRef}) {
       <div className="card mt-2">
       <div className="card-header">Flights</div>
         <div className="card-body">
+     
       <form className="mt-4 needs-validation" noValidate>
       <div className="row m-2">
         <label htmlFor="flightType" className="col-sm-4 col-form-label">Trip Type</label>

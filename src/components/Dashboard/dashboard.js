@@ -21,6 +21,7 @@ export default function Dashboard() {
   const flightRef = useRef(null);
   const carRef = useRef(null);
   const busRef = useRef(null);
+  const dailyRef = useRef(null);
   const resultRef = useRef(null);
   
   //Top timeline click handler
@@ -78,13 +79,15 @@ export default function Dashboard() {
   // if current form validation ok the move to next page
   if(allOk && document.querySelector('#tab'+ nextTabId))
     document.querySelector('#tab'+ nextTabId).click();
-
   }
 
   // submit button
-  const submit = () => {
-      document.querySelector('#tab6').click();
+  const submit = async() => {
+     if(await dailyRef.current()){
       resultRef.current()
+      document.querySelector('#tab6').click();
+     }
+      
   }
 
     return (
@@ -192,7 +195,7 @@ export default function Dashboard() {
               {/* bus-pane end */}
 
               <div className="tab-pane fade" id="dailylife" role="tabpanel" aria-labelledby="contact-tab">
-              <DailyLifeandMiscContainer />
+              <DailyLifeandMiscContainer  parentRef={dailyRef} />
               </div>
               {/* dailylife-pane end */}
               
